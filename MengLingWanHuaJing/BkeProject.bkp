@@ -1,0 +1,16 @@
+{
+    "import": {
+        "ld_extend.bkscr": 0,
+        "macro.bkscr": 0,
+        "macroself.bkscr": 0,
+        "main.bkscr": 0,
+        "menu_main.bkscr": 0,
+        "saveload.bkscr": 0
+    },
+    "name": "Come On",
+    "script": {
+    },
+    "source": {
+    },
+    "version": "1.2"
+}

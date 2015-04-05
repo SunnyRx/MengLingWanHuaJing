@@ -1,0 +1,29 @@
+%[
+  "menu_main.bkscr"=>%[
+    "*changeSe"=>6,
+    "*Anime"=>78,
+    "*changeFullScreen"=>404,
+    "*changeAutoSpeed"=>6,
+    "*back"=>16,
+    "*modeSet"=>128,
+    "*menuback"=>13,
+    "*changeTextSpeed"=>6,
+    "*quitGame"=>9,
+    "*changeSkipAll"=>404,
+    "*loadConfig"=>590,
+    "*changeBGM"=>6
+  ],
+  "saveload.bkscr"=>%[
+    "*loadPage"=>698,
+    "*loadSL"=>320,
+    "*runSL"=>160,
+    "*functionSL"=>15,
+    "*SLback"=>12
+  ],
+  "main.bkscr"=>%[
+    "*menuAnime"=>11,
+    "*back"=>16,
+    "*main"=>398,
+    "*menuback"=>13
+  ]
+]

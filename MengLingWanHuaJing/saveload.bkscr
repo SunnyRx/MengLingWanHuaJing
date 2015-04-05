@@ -1,0 +1,105 @@
+﻿//类变量
+#var _saveBackground=_menuDocument+"SL_backgroundB";//存档界面背景
+#var _loadBackground=_menuDocument+"SL_backgroundA";//读档界面背景
+#global.SLflag;//存读档标记
+#var _SL_label=300;//存档界面层，存读档界面的所有元素都放在这个层上
+//类方法
+*register
+	[macro name="loadSL" flag]//加载存读档界面，flag为真时存档，假时为读档,tb为textbox是否开启
+	[macro name="loadPage" page]//加载存读档界面中的档案
+	//[macro name="functionSL" noNumber]//
+	//[macro name="runSL" flag noNumber]//存读取功能，flag为真时存档，否则读档，noNumber为档案编号
+	[macro name="*SLback"]//返回用
+[return]
+
+//——————————loadSL——————————
+*loadSL
+	[layer index=_SL_label width=System.resolutionSize[0] height=System.resolutionSize[1]]//声明SL层
+	[addto index=_SL_label target=basic_layer pos=[0,0] zorder=0 opacity=255]//添加到basic层
+	//判断存档还是读档
+	#SLflag=flag;
+	[if "SLflag"]
+		[sprite index=301 file=_saveBackground]
+	[else]
+		[sprite index=301 file=_loadBackground]
+	[endif]
+	[addto index=301 target=_SL_label pos=[0,0] zorder=0 opacity=255]
+
+	#t.select=0;//被选中的存档编号，默认为0
+
+	[call label=*loadPage]
+
+	[button index=304 idle=_menuDocument+"SL_yes_normal" hover=_menuDocument+"SL_yes_touch" click=_menuDocument+"SL_yes_touch"]
+	[button index=305 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*SLback","saveload","jump"]]
+	[addto index=304 target=_SL_label pos=[896,560]]
+	[addto index=305 target=_SL_label pos=[1010,560]]
+
+
+	[waitbutton]
+[return]
+
+//——————————loadPage——————————
+*loadPage
+	#log("LoadPage called.CurrentPage.");
+	#log(page);
+	[pretrans index=_SL_label]
+
+	[for var=i range=range(1,6)]
+		[textsprite index=300+i*10+1 text="NO."+(page*5+i) color=0xf1edd6 stroke=true strokecolor=0xad8134]
+		[addto index=300+i*10+1 target=_SL_label pos=[142,(i-1)*46+136] zorder=300]
+		[if "!SaveData.exist(page*5+i)"]
+		[else]
+		[endif]
+
+	[next]
+
+	[if "(t.select%5==1) && (t.select)"]
+		[button index=300+1*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+	[else]
+		[button index=300+1*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch"]
+	[endif]
+	[addto index=300+1*10+5 target=_SL_label pos=[142,136]]
+
+	[if "(t.select%5==2) && (t.select)"]
+		[button index=300+2*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+	[else]
+		[button index=300+2*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch"]
+	[endif]
+	[addto index=300+2*10+5 target=_SL_label pos=[142,182]]
+
+	[if "(t.select%5==3) && (t.select)"]
+		[button index=300+3*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+	[else]
+		[button index=300+3*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch"]
+	[endif]
+	[addto index=300+3*10+5 target=_SL_label pos=[142,228]]
+
+	[if "(t.select%5==4) && (t.select)"]
+		[button index=300+4*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+	[else]
+		[button index=300+4*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch"]
+	[endif]
+	[addto index=300+4*10+5 target=_SL_label pos=[142,274]]
+
+	[if "(t.select%5==0) && (t.select)"]
+		[button index=300+5*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+	[else]
+		[button index=300+5*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch"]
+	[endif]
+	[addto index=300+5*10+5 target=_SL_label pos=[142,320]]
+
+	//显示翻页按钮
+	[button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","call","page-=1"]]
+	[button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","call","page+=1"]]
+	[addto index=302 target=_SL_label pos=[973,412]]
+	[addto index=303 target=_SL_label pos=[973,457]]
+
+	[trans mode="crossfade" index=_SL_label time=300]
+	[waittrans index=_SL_label]
+
+[return]
+
+//——————————SLback——————————
+*SLback
+	[removeall index=_SL_label delete=true]
+[return]

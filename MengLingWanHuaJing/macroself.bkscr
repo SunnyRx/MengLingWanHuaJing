@@ -1,0 +1,48 @@
+﻿*register
+[macro name="wz"]
+[macro name="name" name]
+[macro name="场景" 场景]
+[macro name="立绘" 立绘]
+[macro name="消除"]
+//[macro name="playbgm" storage]
+[return]
+
+*wz
+//[messagelayer index=_ldName_layer active=true]
+[er]
+[messagelayer index=_ldName_layer active=false]
+[textwindow file=_menuDocument+"mframe" opacity=0]
+[messagelayer index=_ldMessage_layer active=true]
+[return]
+
+*name
+[er]
+[messagelayer index=_ldName_layer active=false]
+[textwindow file=_menuDocument+"mframe" opacity=255]// pos=[105,360] rect=[40,0,100,20] xinterval=1 yinterval=1]
+[text text="【"+名字+"】"]
+//[messagelayer index=_ldName_layer active=false]
+[messagelayer index=_ldMessage_layer active=true]
+[return]
+
+*场景
+[pretrans index=0]
+[sprite index=0 file="image/bg/"+场景]
+[trans mode="crossfade" time=1200 index=0]
+[waittrans index=0 canskip=true]
+[return]
+
+*立绘
+[pretrans index=1]
+[sprite index=1 file="image/fg/"+立绘]
+[addto index=1 target=basic_layer pos=[System.resolutionSize[0]/2,System.resolutionSize[1]] opacity=255]
+[trans mode="crossfade" time=300 index=1]
+[waittrans index=1 canskip=true]
+[return]
+
+*消除
+[action mode="fadeto" opacity=0 time=300 target=1]
+[waitallaction]
+[waitaction index=1 canskip=true]
+[remove index=1]
+[return]
+
