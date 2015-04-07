@@ -5,6 +5,7 @@
 #var _backgroundB="image/menu/main_backgroundB";//主菜单背景图片文件
 #var _configBackground="image/menu/config_background";//Config菜单背景
 #var _menu_layer=10;//Config层
+#var _main_layer=8;//主菜单层
 #var _background_layer=7;//主菜单背景层
 #var _menuDocument="image/menu/";//放menu图片的文件夹路径
 #var _saveBackground=_menuDocument+"save ui";//存档界面背景
@@ -81,6 +82,10 @@
 //预处理
 [call label=*back]
 [call label=*menuback]
+
+[layer index=_main_layer width=System.resolutionSize[0] height=System.resolutionSize[1]]//声明SL层
+[addto index=_main_layer target=basic_layer pos=[0,0] zorder=10 opacity=255]//添加到basic层
+
 //
 [layer index=_background_layer width=System.resolutionSize[0] height=System.resolutionSize[1]]
 [addto index=_background_layer target=basic_layer pos=[0,0] zorder=0 opacity=255]
@@ -89,26 +94,26 @@
 [action mode="fadeto" opacity=255 time=3000 target=0]
 [waitaction index=0 canskip=true]
 
-[pretrans index=basic_layer]
-[button index=1 idle=_menuDocument+"button_main_newgame_normal" hover=_menuDocument+"button_main_newgame_touch" click=_menuDocument+"button_main_newgame_click" onclick=["*modeSet",'menu_main','callback',"mode=1"]]//NewGame按钮
+[pretrans index=_main_layer]
+[button index=1 idle=_menuDocument+"button_main_newgame_normal" hover=_menuDocument+"button_main_newgame_touch" click=_menuDocument+"button_main_newgame_click" onclick=["*modeSet",'menu_main','call',"mode=1"]]//NewGame按钮
 [anchor index=1 set="center" keep=true]
-[addto index=1 target=basic_layer pos=[908,145] zorder=0 opacity=255]
-[button index=2 idle=_menuDocument+"button_main_load_normal" hover=_menuDocument+"button_main_load_touch" click=_menuDocument+"button_main_load_click" onclick=["*modeSet",'menu_main','callback',"mode=2"]]//Load按钮
+[addto index=1 target=_main_layer pos=[908,145] zorder=0 opacity=255]
+[button index=2 idle=_menuDocument+"button_main_load_normal" hover=_menuDocument+"button_main_load_touch" click=_menuDocument+"button_main_load_click" onclick=["*modeSet",'menu_main','call',"mode=2"]]//Load按钮
 [anchor index=2 set="center" keep=true]
-[addto index=2 target=basic_layer pos=[903,230] zorder=0 opacity=255]
-[button index=3 idle=_menuDocument+"button_main_cg_normal" hover=_menuDocument+"button_main_cg_touch" click=_menuDocument+"button_main_cg_click" onclick=["*modeSet",'menu_main','jump',"mode=3"]]//cg按钮
+[addto index=2 target=_main_layer pos=[903,230] zorder=0 opacity=255]
+[button index=3 idle=_menuDocument+"button_main_cg_normal" hover=_menuDocument+"button_main_cg_touch" click=_menuDocument+"button_main_cg_click" onclick=["*modeSet",'menu_main','call',"mode=3"]]//cg按钮
 [anchor index=3 set="center" keep=true]
-[addto index=3 target=basic_layer pos=[898,315] zorder=0 opacity=255]
-[button index=4 idle=_menuDocument+"button_main_config_normal" hover=_menuDocument+"button_main_config_touch" click=_menuDocument+"button_main_config_click" onclick=["*modeSet",'menu_main','jump',"mode=4"]]//config按钮
+[addto index=3 target=_main_layer pos=[898,315] zorder=0 opacity=255]
+[button index=4 idle=_menuDocument+"button_main_config_normal" hover=_menuDocument+"button_main_config_touch" click=_menuDocument+"button_main_config_click" onclick=["*modeSet",'menu_main','call',"mode=4"]]//config按钮
 [anchor index=4 set="center" keep=true]
-[addto index=4 target=basic_layer pos=[888,400] zorder=0 opacity=255]
-[button index=5 idle=_menuDocument+"button_main_exit_normal" hover=_menuDocument+"button_main_exit_touch" click=_menuDocument+"button_main_exit_click" onclick=["*modeSet",'menu_main','jump',"mode=5"]]//exit按钮
+[addto index=4 target=_main_layer pos=[888,400] zorder=0 opacity=255]
+[button index=5 idle=_menuDocument+"button_main_exit_normal" hover=_menuDocument+"button_main_exit_touch" click=_menuDocument+"button_main_exit_click" onclick=["*modeSet",'menu_main','call',"mode=5"]]//exit按钮
 [anchor index=5 set="center" keep=true]
-[addto index=5 target=basic_layer pos=[873,485] zorder=0 opacity=255]
+[addto index=5 target=_main_layer pos=[873,485] zorder=0 opacity=255]
 [sprite index=6 file=_menuDocument+"main_title"]
-[addto index=6 target=basic_layer pos=[0,0] zorder=0 opacity=255]
-[trans mode="universal" rule="image/rule/9" index=basic_layer time=3000]
-[waittrans index=basic_layer]
+[addto index=6 target=_main_layer pos=[0,0] zorder=0 opacity=255]
+[trans mode="universal" rule="image/rule/9" index=_main_layer time=3000]
+[waittrans index=_main_layer]
 #t.menuAnima=true;//标记图A还图B
 [call label="*menuAnime"]
 [waitbutton]
@@ -116,7 +121,9 @@
 
 //——————————modeSet——————————
 *modeSet
-#animeTest.enable=false;
+#global.animeTest.enable=false;
+#log(global.animeText.enable);
+[remove index=_main_layer]
 [if "mode==1"]
 	[jump label="*start" file="main"]
 [else]
@@ -124,7 +131,15 @@
 		[call label="*loadSL" file="saveload"]
 	[else]
 		[if "mode==3"]
+		[button index=8 idle=_menuDocument+"button_main_exit_normal" onclick=call xxx]
+		[addto index=8 target=basic_layer]
 
+		[click]
+		#log("click running!")
+
+		*xxx
+		[sendevent name="click"]
+		#log("xxx running!")
 		[else]
 			[if "mode==4"]
 				[call label="*loadConfig"]
@@ -132,7 +147,8 @@
 		[endif]
 	[endif]
 [endif]
-#animeTest.enable=true;
+[addto index=_main_layer target=basic_layer]
+#global.animeTest.enable=true;
 [return]
 
 //——————————loadConfig——————————
