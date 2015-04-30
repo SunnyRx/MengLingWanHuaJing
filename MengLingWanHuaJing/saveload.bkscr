@@ -3,14 +3,16 @@
 #var _loadBackground=_menuDocument+"SL_backgroundA";//读档界面背景
 #global.SLflag;//存读档标记
 #var _SL_label=300;//存档界面层，存读档界面的所有元素都放在这个层上
+#var _SL_labelM=290;//存读档提示界面
 //#f.SLpage;
 //类方法
 *register
 	[macro name="loadSL" flag]//加载存读档界面，flag为真时存档，假时为读档,tb为textbox是否开启
-	[macro name="loadPage" page select]//加载存读档界面中的档案
+	[macro name="loadPage" page select]//加载存读档界面中的档案页面，page为页数，select为选中存档编号
 	//[macro name="functionSL" noNumber]//
-	//[macro name="runSL" flag noNumber]//存读取功能，flag为真时存档，否则读档，noNumber为档案编号
+	[macro name="runSL" flag select]//存读取功能，flag为真时存档，否则读档，select为档案编号
 	[macro name="SLback"]//返回用
+	#global.select = 0;
 [return]
 
 //——————————loadSL——————————
@@ -18,6 +20,9 @@
 #log(animeText.enable);
 	[layer index=_SL_label width=System.resolutionSize[0] height=System.resolutionSize[1]]//声明SL层
 	[addto index=_SL_label target=basic_layer pos=[0,0] zorder=0 opacity=255]//添加到basic层
+
+	[layer index=_SL_labelM width=System.resolutionSize[0] height=System.resolutionSize[1] color=0x000000 opacity=255*0.75]//声明SL层
+	//[addto index=_SL_labelM target=_SL_label pos=[0,0] zorder=0 opacity=255]//添加到basic层
 
 	//初始化当前页页码
 	[if "!f.SLpage"]
@@ -32,11 +37,11 @@
 	[endif]
 	[addto index=301 target=_SL_label pos=[0,0] zorder=0 opacity=255]
 
-	#t.select=0;//被选中的存档编号，默认为0
+	//#t.select=0;//被选中的存档编号，默认为0
 
-	[loadPage page=f.SLpage select=t.select]
+	[loadPage page=f.SLpage select=0]
 
-	[button index=304 idle=_menuDocument+"SL_yes_normal" hover=_menuDocument+"SL_yes_touch" click=_menuDocument+"SL_yes_touch"]
+	[button index=304 idle=_menuDocument+"SL_yes_normal" hover=_menuDocument+"SL_yes_touch" click=_menuDocument+"SL_yes_touch" onclick=["*runSL","saveload","call","flag=SLflag,select=global.select"]]
 	[button index=305 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*SLback","saveload","jump"]]
 	[addto index=304 target=_SL_label pos=[896,560]]
 	[addto index=305 target=_SL_label pos=[1010,560]]
@@ -49,14 +54,14 @@
 *loadPage
 	#log("LoadPage called.CurrentPage.");
 	#log(page);
-
+	#global.select = select; 
 	[if "page>=0"]
 	#f.SLpage=page;
 	[pretrans index=_SL_label]
 
 	[for var=i range=range(1,6)]
 		[textsprite index=300+i*10+1 text="NO."+(page*5+i) color=0xf1edd6 stroke=true strokecolor=0xad8134]
-		[addto index=300+i*10+1 target=_SL_label pos=[142,(i-1)*46+136] zorder=300]
+		[addto index=300+i*10+1 target=_SL_label pos=[142,(i-1)*46+136] zorder=199]
 		[if "!SaveData.exist(page*5+i)"]
 		[else]
 		[endif]
@@ -112,4 +117,43 @@
 //——————————SLback——————————
 *SLback
 	[removeall index=_SL_label delete=true]
+[return]
+
+//——————————runSL——————————
+*runSL
+[if "select"]
+	[if "flag"][if "SaveData.exist(select)"]
+	[pretrans index=_SL_labelM]
+		[addto index=_SL_labelM target=_SL_label pos=[0,0] zorder=200 opacity=255]
+		[sprite index=_SL_labelM+1 file=_menuDocument+"SL_message.png"]
+		[anchor index=_SL_labelM+1 set="center" keep=true]
+		[addto index=_SL_labelM+1 target=_SL_labelM pos=[System.resolutionSize[0]/2,System.resolutionSize[1]/2] zorder=201 opacity=255*0.75]
+		[button index=_SL_labelM+2 idle=_menuDocument+"SL_yesM_normal" hover=_menuDocument+"SL_yesM_touch" click=_menuDocument+"SL_yesM_touch" onclick=["*runContinue","saveload","jump"]]
+		[anchor index=_SL_labelM+2 set="center" keep=true]
+		[addto index=_SL_labelM+2 target=_SL_labelM pos=[System.resolutionSize[0]/2-75,System.resolutionSize[1]/2+25] zorder=202 opacity=255]
+		[button index=_SL_labelM+3 idle=_menuDocument+"SL_noM_normal" hover=_menuDocument+"SL_noM_touch" click=_menuDocument+"SL_noM_touch" onclick=["*runSLback","saveload","jump"]]
+		[anchor index=_SL_labelM+3 set="center" keep=true]
+		[addto index=_SL_labelM+3 target=_SL_labelM pos=[System.resolutionSize[0]/2+75,System.resolutionSize[1]/2+25] zorder=203 opacity=255]
+		[textsprite index=_SL_labelM+4 size=25 text="要覆盖原有存档吗？" color=0xf1edd6 stroke=true strokecolor=0x1f6766]
+		[anchor index=_SL_labelM+4 set="center" keep=true]
+		[addto index=_SL_labelM+4 target=_SL_labelM+1 pos=[173,35] zorder=203 opacity=255]
+	[trans mode="crossfade" index=_SL_labelM time=0]
+	[waittrans index=_SL_labelM]
+	[waitbutton]
+	[endif][endif]
+
+	*runContinue
+	[if "flag"]
+		[savetoimage index=1024 file="saveImage"+select]
+		[save index=select]
+	[else]
+		[if "SaveData.exist(select)"]
+			[load index=select]
+		[endif]
+	[endif]
+
+	*runSLback
+	[removeall index=_SL_labelM delete=true]
+	[remove index=_SL_labelM]
+[endif]
 [return]

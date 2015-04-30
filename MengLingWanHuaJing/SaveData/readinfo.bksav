@@ -17,7 +17,9 @@
   "saveload.bkscr"=>%[
     "*loadPage"=>698,
     "*loadSL"=>320,
-    "*runSL"=>160,
+    "*runContinue"=>69,
+    "*runSL"=>372,
+    "*runSLback"=>23,
     "*functionSL"=>15,
     "*SLback"=>12
   ],
