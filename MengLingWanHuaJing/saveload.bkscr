@@ -1,4 +1,4 @@
-//类变量
+﻿//类变量
 #var _saveBackground=_menuDocument+"SL_backgroundB";//存档界面背景
 #var _loadBackground=_menuDocument+"SL_backgroundA";//读档界面背景
 #global.SLflag;//存读档标记

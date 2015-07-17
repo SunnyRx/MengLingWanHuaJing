@@ -1,3 +1,20 @@
 ﻿*main
 
 [loadMainMenu]
+
+*start
+[loadTextbox]
+
+
+[sprite index=0 file="image/menu/road2"]
+[addto index=0 target=basic_layer pos=[0,0] zorder=0 opacity=255]
+
+[wz]
+Hello[p]
+This is test![p]
+
+[name name="雾樱"]
+好的，其实我早就有所准备了。[p]
+
+[name name="路人酱"]
+神经病[p]
