@@ -13,6 +13,7 @@
 Hello[p]
 This is test![p]
 
+[bgm file="sound/hand in hand"]
 
 [sprite index=71 file="image/menu/ch1"]
 [anchor index=71 set="bottomcenter" keep=true]

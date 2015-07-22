@@ -167,77 +167,27 @@ global.select = 0;##
 　}
 　Hello
 　@p
-　ld_extend.bkscr : *showMenu
-　@addto index=_menu_layer target=basic_layer zorder=800
-　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
-　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
-　@return
-　ld_extend.bkscr : *ifMenu
-　@return
-　ld_extend.bkscr : *ifMenu
-　@return
-　ld_extend.bkscr : *ifMenu
-　@call label=*hideMenu
-　ld_extend.bkscr : *hideMenu
-　@remove index=_menu_layer
-　@return
-　@return
-　ld_extend.bkscr : *showMenu
-　@addto index=_menu_layer target=basic_layer zorder=800
-　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
-　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
-　@return
-　ld_extend.bkscr : *ifMenu
-　@return
-　ld_extend.bkscr : *ifMenu
-　@return
-　ld_extend.bkscr : *ifMenu
-　@call label=*hideMenu
-　ld_extend.bkscr : *hideMenu
-　@remove index=_menu_layer
-　@return
-　@return
-　ld_extend.bkscr : *showMenu
-　@addto index=_menu_layer target=basic_layer zorder=800
-　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
-　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
-　@return
-　ld_extend.bkscr : *ifMenu
-　@call label=*hideMenu
-　ld_extend.bkscr : *hideMenu
-　@remove index=_menu_layer
-　@return
-　@return
-　ld_extend.bkscr : *showMenu
-　@addto index=_menu_layer target=basic_layer zorder=800
-　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
-　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
-　@return
-　ld_extend.bkscr : *ifMenu
-　@call label=*hideMenu
-　ld_extend.bkscr : *hideMenu
-　@remove index=_menu_layer
-　@return
-　@return
-　ld_extend.bkscr : *showMenu
-　@addto index=_menu_layer target=basic_layer zorder=800
-　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
-　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
-　@return
-　ld_extend.bkscr : *ifMenu
-　@call label=*hideMenu
-　ld_extend.bkscr : *hideMenu
-　@remove index=_menu_layer
-　@return
-　@return
-　ld_extend.bkscr : *showMenu
-　@addto index=_menu_layer target=basic_layer zorder=800
-　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
-　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
-　@return
-　ld_extend.bkscr : *ifMenu
-　@call label=*hideMenu
-　ld_extend.bkscr : *hideMenu
-　@remove index=_menu_layer
-　@return
-　@return
+　This is test!
+　@p
+　@bgm file="sound/hand in hand"
+　@sprite index=71 file="image/menu/ch1"
+　@anchor index=71 set="bottomcenter" keep=true
+　@addto index=71 target=basic_layer pos=[System.resolutionSize[0]/2,System.resolutionSize[1],] opacity=255
+　@name name="雾樱"
+　{
+　　macroself.bkscr : *name
+　　@er
+　　@messagelayer index=_ldName_layer active=1
+　　#log(name);
+　　"雾樱"
+　　@remove index=1001
+　　[警告]没有找到索引1001对应的精灵，该精灵没有创建或者已被销毁。
+　　　　　当试图执行命令（remove）时该错误处于原文件（macroself.bkscr）的第27行。
+　　@sprite index=1001 file="image/menu/name_1"
+　　@addto index=1001 target=500 pos=[157, 395]
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　但是没有梦想的话，怎么成为梦想家呢。
+　@p
