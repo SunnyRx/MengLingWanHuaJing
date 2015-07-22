@@ -21,7 +21,8 @@
 [macro name="autoModeOn"]
 [macro name="skipModeOn"]
 [macro name="showMenu"]
-[macro name="hideMenu"]		
+[macro name="hideMenu"]
+[macro name="ifMenu"]
 [return]
 
 *ld_dialogbox
@@ -42,10 +43,10 @@
 
 //菜单部分
 [layer index=_menu_layer width=System.resolutionSize[0] height=System.resolutionSize[1]]
-[button index=_menu_layer+1 idle=_menuDocument+"menu_background" onclick=["*hideMenu",'ld_extend','call']]
+[button index=_menu_layer+1 idle=_menuDocument+"menu_background" onclick=["*ifMenu",'ld_extend','call']]
 [addto index=_menu_layer+1 target=_menu_layer]
 [sprite index=_menu_layer+2 file=_menuDocument+"menu_background2"]
-[addto index=_menu_layer+2 target=_menu_layer pos=[840,0]]
+
 
 [return]
 
@@ -216,8 +217,19 @@
 	
 *showMenu
 [addto index=_menu_layer target=basic_layer zorder=800]
+
+[addto index=_menu_layer+2 target=_menu_layer pos=[1104,0]]
+
+[action mode="moveto" pos=[840,0] time=50 target=_menu_layer+2]
+	
 [return]
 	
 *hideMenu
 [remove index=_menu_layer]
+[return]
+	
+*ifMenu
+[if "System.mouseStatus[0]<840"]
+[call label="*hideMenu"]
+[endif]
 [return]

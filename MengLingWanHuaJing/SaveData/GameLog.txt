@@ -114,13 +114,6 @@ global.select = 0;##
 　#global.animeTest.enable=true;
 　@return
 　@waitbutton
-　menu_main.bkscr : *Anime
-　@pretrans index=0
-　#t.menuAnima=false;
-　@sprite index=0 file=_backgroundA
-　@trans mode="universal" rule="image/rule/69" time=5000 index=0
-　@waittrans index=0
-　@return
 　menu_main.bkscr : *modeSet
 　#global.animeTest.enable=false;
 　#log(global.animeText.enable);
@@ -146,10 +139,9 @@ global.select = 0;##
 　　　@messagelayer index=_ldName_layer active=0
 　　　@messagelayer index=_ldMessage_layer active=1
 　　　@layer index=_menu_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
-　　　@button index=_menu_layer+1 idle=_menuDocument+"menu_background" onclick=["*hideMenu","ld_extend","call"]
+　　　@button index=_menu_layer+1 idle=_menuDocument+"menu_background" onclick=["*ifMenu","ld_extend","call"]
 　　　@addto index=_menu_layer+1 target=_menu_layer
 　　　@sprite index=_menu_layer+2 file=_menuDocument+"menu_background2"
-　　　@addto index=_menu_layer+2 target=_menu_layer pos=[840, 0]
 　　　@return
 　　}
 　　@ld_dialogboxButton
@@ -175,29 +167,77 @@ global.select = 0;##
 　}
 　Hello
 　@p
-　This is test!
-　@p
-　@sprite index=71 file="image/menu/ch1"
-　@anchor index=71 set="bottomcenter" keep=true
-　@addto index=71 target=basic_layer pos=[System.resolutionSize[0]/2,System.resolutionSize[1],] opacity=255
-　@name name="雾樱"
-　{
-　　macroself.bkscr : *name
-　　@er
-　　@messagelayer index=_ldName_layer active=1
-　　#log(name);
-　　"雾樱"
-　　@remove index=1001
-　　[警告]没有找到索引1001对应的精灵，该精灵没有创建或者已被销毁。
-　　　　　当试图执行命令（remove）时该错误处于原文件（macroself.bkscr）的第27行。
-　　@sprite index=1001 file="image/menu/name_1"
-　　@addto index=1001 target=500 pos=[157, 395]
-　　@messagelayer index=_ldName_layer active=0
-　　@messagelayer index=_ldMessage_layer active=1
-　　@return
-　}
-　但是没有梦想的话，怎么成为梦想家呢。
-　@p
 　ld_extend.bkscr : *showMenu
 　@addto index=_menu_layer target=basic_layer zorder=800
+　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
+　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
+　@return
+　ld_extend.bkscr : *ifMenu
+　@return
+　ld_extend.bkscr : *ifMenu
+　@return
+　ld_extend.bkscr : *ifMenu
+　@call label=*hideMenu
+　ld_extend.bkscr : *hideMenu
+　@remove index=_menu_layer
+　@return
+　@return
+　ld_extend.bkscr : *showMenu
+　@addto index=_menu_layer target=basic_layer zorder=800
+　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
+　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
+　@return
+　ld_extend.bkscr : *ifMenu
+　@return
+　ld_extend.bkscr : *ifMenu
+　@return
+　ld_extend.bkscr : *ifMenu
+　@call label=*hideMenu
+　ld_extend.bkscr : *hideMenu
+　@remove index=_menu_layer
+　@return
+　@return
+　ld_extend.bkscr : *showMenu
+　@addto index=_menu_layer target=basic_layer zorder=800
+　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
+　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
+　@return
+　ld_extend.bkscr : *ifMenu
+　@call label=*hideMenu
+　ld_extend.bkscr : *hideMenu
+　@remove index=_menu_layer
+　@return
+　@return
+　ld_extend.bkscr : *showMenu
+　@addto index=_menu_layer target=basic_layer zorder=800
+　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
+　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
+　@return
+　ld_extend.bkscr : *ifMenu
+　@call label=*hideMenu
+　ld_extend.bkscr : *hideMenu
+　@remove index=_menu_layer
+　@return
+　@return
+　ld_extend.bkscr : *showMenu
+　@addto index=_menu_layer target=basic_layer zorder=800
+　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
+　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
+　@return
+　ld_extend.bkscr : *ifMenu
+　@call label=*hideMenu
+　ld_extend.bkscr : *hideMenu
+　@remove index=_menu_layer
+　@return
+　@return
+　ld_extend.bkscr : *showMenu
+　@addto index=_menu_layer target=basic_layer zorder=800
+　@addto index=_menu_layer+2 target=_menu_layer pos=[1104, 0]
+　@action mode="moveto" pos=[840, 0] time=50 target=_menu_layer+2
+　@return
+　ld_extend.bkscr : *ifMenu
+　@call label=*hideMenu
+　ld_extend.bkscr : *hideMenu
+　@remove index=_menu_layer
+　@return
 　@return
