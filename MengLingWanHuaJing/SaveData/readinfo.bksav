@@ -1,4 +1,7 @@
 %[
+  "main.bkbin"=>%[
+    "*main"=>415
+  ],
   "menu_main.bkscr"=>%[
     "*changeSe"=>6,
     "*Anime"=>78,

@@ -2,23 +2,23 @@
 //Don't modify this file if not necessery.
 %[
   "soundVolume"=>100,
-  "isFPSEnabled"=>0,
+  "voiceVolume"=>100,
+  "musicVolume"=>100,
+  "textSpeed"=>50,
+  "mouseCursorAutoHideTime"=>2000,
+  "mouseCursor"=>"",
+  "fontSizeFactor"=>1,
+  "maxFrameSpeed"=>60,
+  "skipAll"=>0,
+  "autoModeTime"=>800,
+  "saveHistory"=>1,
+  "isTransitionEnabled"=>1,
   "gameTitle"=>"星梦夜之歌",
   "windowSize"=>[
     1104,
     621
   ],
-  "mouseCursor"=>"",
-  "textSpeed"=>50,
-  "musicVolume"=>100,
-  "isFullScreen"=>0,
-  "maxFrameSpeed"=>60,
   "isTouchPointEnabled"=>1,
-  "voiceVolume"=>100,
-  "mouseCursorAutoHideTime"=>2000,
-  "skipAll"=>0,
-  "saveHistory"=>1,
-  "fontSizeFactor"=>1,
-  "autoModeTime"=>800,
-  "isTransitionEnabled"=>1
+  "isFPSEnabled"=>0,
+  "isFullScreen"=>0
 ]

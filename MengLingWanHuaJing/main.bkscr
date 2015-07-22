@@ -6,15 +6,20 @@
 [loadTextbox]
 
 
-[sprite index=0 file="image/menu/road2"]
-[addto index=0 target=basic_layer pos=[0,0] zorder=0 opacity=255]
+[sprite index=70 file="image/menu/road2"]
+[addto index=70 target=basic_layer pos=[0,0] zorder=0 opacity=255]
 
 [wz]
 Hello[p]
 This is test![p]
 
+
+[sprite index=71 file="image/menu/ch1"]
+[anchor index=71 set="bottomcenter" keep=true]
+[addto index=71 target=basic_layer pos=[System.resolutionSize[0]/2,System.resolutionSize[1]] opacity=255]
+
 [name name="雾樱"]
-好的，其实我早就有所准备了。[p]
+但是没有梦想的话，怎么成为梦想家呢。[p]
 
 [name name="路人酱"]
 神经病[p]
