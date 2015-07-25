@@ -19,11 +19,13 @@
 *loadSL
 #log(animeText.enable);
 	[layer index=_SL_label width=System.resolutionSize[0] height=System.resolutionSize[1]]//声明SL层
-	[addto index=_SL_label target=basic_layer pos=[0,0] zorder=0 opacity=255]//添加到basic层
+	[addto index=_SL_label target=basic_layer pos=[0,0] zorder=900 opacity=255]//添加到basic层
 
 	[layer index=_SL_labelM width=System.resolutionSize[0] height=System.resolutionSize[1] color=0x000000 opacity=255*0.75]//声明SL层
 	//[addto index=_SL_labelM target=_SL_label pos=[0,0] zorder=0 opacity=255]//添加到basic层
-
+	
+	//全局变量作为参数
+	#flag=global.slmark;
 	//初始化当前页页码
 	[if "!f.SLpage"]
 		#f.SLpage=0;
@@ -47,7 +49,7 @@
 	[addto index=305 target=_SL_label pos=[1010,560]]
 
 
-	[waitbutton index=_SL_label]
+	[waitbutton]
 [return]
 
 //——————————loadPage——————————
@@ -63,7 +65,13 @@
 		[textsprite index=300+i*10+1 text="NO."+(page*5+i) color=0xf1edd6 stroke=true strokecolor=0xad8134]
 		[addto index=300+i*10+1 target=_SL_label pos=[142,(i-1)*46+136] zorder=199]
 		[if "!SaveData.exist(page*5+i)"]
+		[textsprite index=300+i*10+2 text="————————————" color=0xf1edd6 stroke=true strokecolor=0xad8134]
+		[addto index=300+i*10+2 target=_SL_label pos=[242,(i-1)*46+136] zorder=199]	
 		[else]
+		[textsprite index=300+i*10+2 text=SaveData.getText(page*5+i) color=0xf1edd6 stroke=true strokecolor=0xad8134]
+		[addto index=300+i*10+2 target=_SL_label pos=[242,(i-1)*46+136] zorder=199]
+		[textsprite index=300+i*10+3 text=toString(SaveData.getTime(page*5+i).getYear())+"/"+toString(SaveData.getTime(page*5+i).getMonth())+'/'+toString(SaveData.getTime(page*5+i).getDay())+' '+toString(SaveData.getTime(page*5+i).getHour())+':'+toString(SaveData.getTime(page*5+i).getMinute()) color=0xf1edd6 stroke=true strokecolor=0xad8134]
+		[addto index=300+i*10+3 target=_SL_label pos=[842,(i-1)*46+136] zorder=199]
 		[endif]
 
 	[next]
@@ -145,7 +153,9 @@
 	*runContinue
 	[if "flag"]
 		[savetoimage index=1024 file="saveImage"+select]
-		[save index=select]
+		[save index=select str=t.title]
+		#log(SaveDate.getText(select));
+		[loadPage page=f.SLpage select=select]
 	[else]
 		[if "SaveData.exist(select)"]
 			[load index=select]

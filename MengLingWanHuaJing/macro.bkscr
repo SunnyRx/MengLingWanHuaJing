@@ -1,5 +1,4 @@
 ﻿*register
-[import file="extend.bkscr"]
 [import file="menu_main.bkscr"]
 [import file="ld_extend.bkscr"]
 [import file="macroself.bkscr"]

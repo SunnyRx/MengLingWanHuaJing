@@ -17,6 +17,7 @@
 #var tFlag;
 #var tbb;
 #sf.page=0;
+#global.slmark=0;
 //类方法
 *register
 [macro name="loadLogo"]//加载LOGO画面
@@ -75,6 +76,8 @@
 //——————————loadMainMenu——————————
 *loadMainMenu
 //初始化
+[history output=false]
+[stop]
 [if "!sf.startOver"]
 #sf.page=0;
 #sf.startOver=true;
@@ -128,6 +131,7 @@
 	[jump label="*start" file="main"]
 [else]
 	[if "mode==2"]
+		#global.slmark=0;
 		[call label="*loadSL" file="saveload"]
 	[else]
 		[if "mode==3"]
@@ -154,39 +158,39 @@
 //——————————loadConfig——————————
 *loadConfig
 [layer index=_menu_layer width=System.resolutionSize[0] height=System.resolutionSize[1]]
-[addto index=_menu_layer target=basic_layer pos=[0,0] zorder=0 opacity=255]
+[addto index=_menu_layer target=basic_layer pos=[0,0] zorder=900 opacity=255]
 [sprite index=11 file=_configBackground]
 [addto index=11 target=_menu_layer pos=[0,0] zorder=0 opacity=255]
 //WindowModeSetting
-[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'','callback',"flag=1"] state=System.skipAll]
+[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'menu_main','callback',"flag=1"] state=System.skipAll]
 [anchor index=12 set="center" keep=true]
 [addto index=12 target=_menu_layer pos=[811,410] zorder=0 opacity=255]
-[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'','callback',"flag=2"] state=!System.skipAll]
+[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'menu_main','callback',"flag=2"] state=!System.skipAll]
 [anchor index=13 set="center" keep=true]
 [addto index=13 target=_menu_layer pos=[926,410] zorder=0 opacity=255]
 //TextSetting
-[slider index=14 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeAutoSpeed",'','call',"value=value"] value=System.autoModeTime min=0 max=100]
+[slider index=14 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeAutoSpeed",'menu_main','call',"value=value"] value=System.autoModeTime min=0 max=100]
 [anchor index=14 set="center" keep=true]
 [addto index=14 target=_menu_layer pos=[867,162] zorder=0 opacity=255]
-[slider index=15 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeTextSpeed",'','call',"value=value"] value=System.textSpeed min=0 max=100]
+[slider index=15 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeTextSpeed",'menu_main','call',"value=value"] value=System.textSpeed min=0 max=100]
 [anchor index=15 set="center" keep=true]
 [addto index=15 target=_menu_layer pos=[867,223] zorder=0 opacity=255]
 //TextModeSetting
-[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'','callback',"flag=1"] state=System.fullScreen]
+[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'menu_main','callback',"flag=1"] state=System.fullScreen]
 [anchor index=16 set="center" keep=true]
 [addto index=16 target=_menu_layer pos=[811,471] zorder=0 opacity=255]
-[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'','callback',"flag=2"] state=!System.fullScreen]
+[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'menu_main','callback',"flag=2"] state=!System.fullScreen]
 [anchor index=17 set="center" keep=true]
 [addto index=17 target=_menu_layer pos=[926,471] zorder=0 opacity=255]
 //SoundSetting
-[slider index=18 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeBGM",'','call',"value=value"] value=Channel.musicVolume min=0 max=100]
+[slider index=18 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeBGM",'menu_main','call',"value=value"] value=Channel.musicVolume min=0 max=100]
 [anchor index=18 set="center" keep=true]
 [addto index=18 target=_menu_layer pos=[867,285] zorder=0 opacity=255]
-[slider index=19 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeSe",'','call',"value=value"] value=Channel.soundVolume min=0 max=100]
+[slider index=19 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeSe",'menu_main','call',"value=value"] value=Channel.soundVolume min=0 max=100]
 [anchor index=19 set="center" keep=true]
 [addto index=19 target=_menu_layer pos=[867,347] zorder=0 opacity=255]
 //ExitButton
-[button index=25 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*back",'','jump']]
+[button index=25 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*back",'menu_main','jump']]
 [anchor index=25 set="center" keep=true]
 [addto index=25 target=_menu_layer pos=[1011,560]]
 [waitbutton]
@@ -220,7 +224,6 @@
 
 //——————————back——————————
 *back
-#animeTest.enable=true;
 [removeall index=_menu_layer]
 [return]
 
@@ -237,32 +240,32 @@
 *changeFullScreen
 [if "flag==1"]
 	[if "System.fullScreen"]
-		[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'','call',"flag=1"] state=System.fullScreen]
+		[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'menu_main','call',"flag=1"] state=System.fullScreen]
 		[anchor index=16 set="center" keep=true]
 		[addto index=16 target=_menu_layer pos=[811,471] zorder=0 opacity=255]
 		[return]
 	[else]
 		#System.fullScreen=true;
-		[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'','callback',"flag=1"] state=System.fullScreen]
+		[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'menu_main','callback',"flag=1"] state=System.fullScreen]
 		[anchor index=16 set="center" keep=true]
 		[addto index=16 target=_menu_layer pos=[811,471] zorder=0 opacity=255]
-		[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'','callback',"flag=2"] state=!System.fullScreen]
+		[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'menu_main','callback',"flag=2"] state=!System.fullScreen]
 		[anchor index=17 set="center" keep=true]
 		[addto index=17 target=_menu_layer pos=[926,471] zorder=0 opacity=255]
 		[return]
 	[endif]
 [else]
 	[if "!System.fullScreen"]
-		[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'','call',"flag=2"] state=!System.fullScreen]
+		[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'menu_main','call',"flag=2"] state=!System.fullScreen]
 		[anchor index=17 set="center" keep=true]
 		[addto index=17 target=_menu_layer pos=[926,471] zorder=0 opacity=255]
 		[return]
 	[else]
 		#System.fullScreen=false;
-		[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'','callback',"flag=1"] state=System.fullScreen]
+		[checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen",'menu_main','callback',"flag=1"] state=System.fullScreen]
 		[anchor index=16 set="center" keep=true]
 		[addto index=16 target=_menu_layer pos=[811,471] zorder=0 opacity=255]
-		[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'','callback',"flag=2"] state=!System.fullScreen]
+		[checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen",'menu_main','callback',"flag=2"] state=!System.fullScreen]
 		[anchor index=17 set="center" keep=true]
 		[addto index=17 target=_menu_layer pos=[926,471] zorder=0 opacity=255]
 		[return]
@@ -274,32 +277,32 @@
 *changeSkipAll
 [if "flag==1"]
 	[if "System.skipAll"]
-		[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'','call',"flag=1"] state=System.skipAll]
+		[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'menu_main','call',"flag=1"] state=System.skipAll]
 		[anchor index=12 set="center" keep=true]
 		[addto index=12 target=_menu_layer pos=[811,410] zorder=0 opacity=255]
 		[return]
 	[else]
 		#System.skipAll=true;
-		[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'','callback',"flag=1"] state=System.skipAll]
+		[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'menu_main','callback',"flag=1"] state=System.skipAll]
 		[anchor index=12 set="center" keep=true]
 		[addto index=12 target=_menu_layer pos=[811,410] zorder=0 opacity=255]
-		[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'','callback',"flag=2"] state=!System.skipAll]
+		[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'menu_main','callback',"flag=2"] state=!System.skipAll]
 		[anchor index=13 set="center" keep=true]
 		[addto index=13 target=_menu_layer pos=[926,410] zorder=0 opacity=255]
 		[return]
 	[endif]
 [else]
 	[if "!System.skipAll"]
-		[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'','call',"flag=2"] state=!System.skipAll]
+		[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'menu_main','call',"flag=2"] state=!System.skipAll]
 		[anchor index=13 set="center" keep=true]
 		[addto index=13 target=_menu_layer pos=[926,410] zorder=0 opacity=255]
 		[return]
 	[else]
 		#System.skipAll=false;
-		[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'','callback',"flag=1"] state=System.skipAll]
+		[checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll",'menu_main','callback',"flag=1"] state=System.skipAll]
 		[anchor index=12 set="center" keep=true]
 		[addto index=12 target=_menu_layer pos=[811,410] zorder=0 opacity=255]
-		[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'','callback',"flag=2"] state=!System.skipAll]
+		[checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll",'menu_main','callback',"flag=2"] state=!System.skipAll]
 		[anchor index=13 set="center" keep=true]
 		[addto index=13 target=_menu_layer pos=[926,410] zorder=0 opacity=255]
 		[return]

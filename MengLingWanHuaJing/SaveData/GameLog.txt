@@ -36,6 +36,8 @@ var tbb;##
 ##
 sf.page=0;##
 ##
+global.slmark=0;##
+##
 var _menuDocument="image/menu/";//放menu图片的文件夹路径##
 ##
 var _text_layer=500;##
@@ -48,7 +50,7 @@ var _ldMessage_layer=550;//对话框编号##
 ##
 var _ldName_layer=600;//姓名框编号##
 ##
-var _menu_layer=800;//菜单层##
+var _mmenu_layer=800;//菜单层##
 ##
 var _saveBackground=_menuDocument+"SL_backgroundB";//存档界面背景##
 ##
@@ -65,18 +67,19 @@ global.select = 0;##
 @loadMainMenu
 {
 　menu_main.bkscr : *loadMainMenu
+　@history output=false
+　@stop
 　@call label=*back
 　menu_main.bkscr : *back
-　#animeTest.enable=true;
 　@removeall index=_menu_layer
-　【错误】没有找到索引800对应的精灵，该精灵没有创建或者已被销毁。
-　　　　　当试图执行命令（removeall）时该错误处于原文件（menu_main.bkscr）的第224行。
+　【错误】没有找到索引10对应的精灵，该精灵没有创建或者已被销毁。
+　　　　　当试图执行命令（removeall）时该错误处于原文件（menu_main.bkscr）的第227行。
 　@return
 　@call label=*menuback
 　menu_main.bkscr : *menuback
 　@removeall index=_littlemenu_layer
 　【错误】没有找到索引50对应的精灵，该精灵没有创建或者已被销毁。
-　　　　　当试图执行命令（removeall）时该错误处于原文件（menu_main.bkscr）的第229行。
+　　　　　当试图执行命令（removeall）时该错误处于原文件（menu_main.bkscr）的第232行。
 　@return
 　@layer index=_main_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
 　@addto index=_main_layer target=basic_layer zorder=10 pos=[0, 0] opacity=255
@@ -118,76 +121,131 @@ global.select = 0;##
 　#global.animeTest.enable=false;
 　#log(global.animeText.enable);
 　@remove index=_main_layer
-　@jump file="main.bkscr" (main.bkscr) label="*start" (*start)
-　main.bkscr : *start
-　@loadTextbox
+　#global.slmark=0;
+　@call file="saveload.bkscr" (saveload.bkscr) label="*loadSL" (*loadSL)
+　saveload.bkscr : *loadSL
+　#log(animeText.enable);
+　@layer index=_SL_label width=System.resolutionSize[0] height=System.resolutionSize[1]
+　@addto index=_SL_label target=basic_layer zorder=900 pos=[0, 0] opacity=255
+　@layer index=_SL_labelM width=System.resolutionSize[0] height=System.resolutionSize[1] color=0 opacity=191
+　#flag=global.slmark;
+　#f.SLpage=0;
+　#SLflag=flag;
+　@sprite index=301 file=_loadBackground
+　@addto index=301 target=_SL_label zorder=0 pos=[0, 0] opacity=255
+　@loadPage page=f.SLpage select=0
 　{
-　　ld_extend.bkscr : *loadTextbox
-　　@ld_dialogbox
-　　{
-　　　ld_extend.bkscr : *ld_dialogbox
-　　　@messagelayer index=_ldMessage_layer active=1
-　　　@addto index=_ldMessage_layer target=basic_layer zorder=50
-　　　@textwindow file=_menuDocument+"dialogBox" opacity=191 pos=[0, 448] rect=[134, 30, 736, 120] xinterval=1 yinterval=1
-　　　@textstyle size=22 color=[16777215, 16777215] bold=true shadow=true
-　　　@sprite index=_ldMessage_layer+1 file=_menuDocument+"star"
-　　　@textcursor index=_ldMessage_layer+1 follow=false pos=[1018, 100]
-　　　@messagelayer index=_ldName_layer active=1
-　　　@addto index=_ldName_layer target=_ldMessage_layer zorder=50
-　　　@textwindow opacity=255 pos=[157, 395] rect=[0, 0, 100, 40] xinterval=1 yinterval=1
-　　　@textstyle size=21 bold=false
-　　　@messagelayer index=_ldName_layer active=0
-　　　@messagelayer index=_ldMessage_layer active=1
-　　　@layer index=_menu_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
-　　　@button index=_menu_layer+1 idle=_menuDocument+"menu_background" onclick=["*ifMenu","ld_extend","call"]
-　　　@addto index=_menu_layer+1 target=_menu_layer
-　　　@sprite index=_menu_layer+2 file=_menuDocument+"menu_background2"
-　　　@return
-　　}
-　　@ld_dialogboxButton
-　　{
-　　　ld_extend.bkscr : *ld_dialogboxButton
-　　　@layer index=_text_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
-　　　@addto index=_text_layer target=basic_layer zorder=_text_layer
-　　　@button index=501 idle=_menuDocument+"dialogBox_menu" hover=_menuDocument+"dialogBox_menu" click=_menuDocument+"dialogBox_menu" onclick=["*showMenu","ld_extend","call"]
-　　　@addto index=501 target=_text_layer zorder=90 pos=[1022, 386]
-　　　@return
-　　}
+　　saveload.bkscr : *loadPage
+　　#log("LoadPage called.CurrentPage.");
+　　"LoadPage called.CurrentPage."
+　　#log(page);
+　　0
+　　#global.select = select; 
+　　#f.SLpage=page;
+　　@pretrans index=_SL_label
+　　@for var=i range=range(1,6)
+　　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　　@next
+　　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　　@addto index=315 target=_SL_label pos=[142, 136]
+　　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　　@addto index=325 target=_SL_label pos=[142, 182]
+　　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　　@addto index=335 target=_SL_label pos=[142, 228]
+　　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　　@addto index=345 target=_SL_label pos=[142, 274]
+　　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　　@addto index=355 target=_SL_label pos=[142, 320]
+　　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　　@addto index=302 target=_SL_label pos=[973, 412]
+　　@addto index=303 target=_SL_label pos=[973, 457]
+　　@trans mode="crossfade" time=0 index=_SL_label
+　　@waittrans index=_SL_label
 　　@return
 　}
-　@sprite index=70 file="image/menu/road2"
-　@addto index=70 target=basic_layer zorder=0 pos=[0, 0] opacity=255
-　@wz
-　{
-　　macroself.bkscr : *wz
-　　@er
-　　@messagelayer index=_ldName_layer active=0
-　　@messagelayer index=_ldMessage_layer active=1
-　　@return
-　}
-　Hello
-　@p
-　This is test!
-　@p
-　@bgm file="sound/hand in hand"
-　@sprite index=71 file="image/menu/ch1"
-　@anchor index=71 set="bottomcenter" keep=true
-　@addto index=71 target=basic_layer pos=[System.resolutionSize[0]/2,System.resolutionSize[1],] opacity=255
-　@name name="雾樱"
-　{
-　　macroself.bkscr : *name
-　　@er
-　　@messagelayer index=_ldName_layer active=1
-　　#log(name);
-　　"雾樱"
-　　@remove index=1001
-　　[警告]没有找到索引1001对应的精灵，该精灵没有创建或者已被销毁。
-　　　　　当试图执行命令（remove）时该错误处于原文件（macroself.bkscr）的第27行。
-　　@sprite index=1001 file="image/menu/name_1"
-　　@addto index=1001 target=500 pos=[157, 395]
-　　@messagelayer index=_ldName_layer active=0
-　　@messagelayer index=_ldMessage_layer active=1
-　　@return
-　}
-　但是没有梦想的话，怎么成为梦想家呢。
-　@p
+　@button index=304 idle=_menuDocument+"SL_yes_normal" hover=_menuDocument+"SL_yes_touch" click=_menuDocument+"SL_yes_touch" onclick=["*runSL","saveload","call","flag=SLflag,select=global.select"]
+　@button index=305 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*SLback","saveload","jump"]
+　@addto index=304 target=_SL_label pos=[896, 560]
+　@addto index=305 target=_SL_label pos=[1010, 560]
+　@waitbutton
+　saveload.bkscr : *SLback
+　@removeall index=_SL_label delete=true
+　@return
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *Anime
+　@pretrans index=0
+　#t.menuAnima=false;
+　@sprite index=0 file=_backgroundA
+　@trans mode="universal" rule="image/rule/69" time=5000 index=0
+　@waittrans index=0
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *modeSet
+　#global.animeTest.enable=false;
+　#log(global.animeText.enable);
+　@remove index=_main_layer
+　@addto index=_main_layer target=basic_layer
+　#global.animeTest.enable=true;
+　@return
+　menu_main.bkscr : *Anime
+　@pretrans index=0
+　#t.menuAnima=true;
+　@sprite index=0 file=_backgroundB
+　@trans mode="universal" rule="image/rule/69" time=5000 index=0
+　@waittrans index=0

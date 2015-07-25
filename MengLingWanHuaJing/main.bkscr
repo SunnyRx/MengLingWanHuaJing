@@ -4,16 +4,42 @@
 
 *start
 [loadTextbox]
-
+[history output=true]
 
 [sprite index=70 file="image/menu/road2"]
 [addto index=70 target=basic_layer pos=[0,0] zorder=0 opacity=255]
+
+#t.title="序章-梦的伊始";
 
 [wz]
 Hello[p]
 This is test![p]
 
 [bgm file="sound/hand in hand"]
+
+[wz]
+你[l][r]
+听说过“祈梦石”吗？[p]
+传说那是魔鬼的礼物，能够打破梦境之间的壁垒，带来一段前所未有的经历和[p]
+但既是魔鬼的礼物，自然也有其危险性。[l][r]
+是什么[l][r]
+且自己去体会吧。[p]
+
+[name name="桐人"] 
+好奇怪的梦......[p]
+我拍了拍脑袋，按掉了床边嘀铃铃响的闹钟，起床洗漱，开始这一天的生活。[p]
+我，绘谷桐人，一个普通的高中生，没有什么特别的地方。[p]
+唯一让人羡慕的就是我有一个女神级的青梅竹马，我和她的关系嘛......[l][r]
+肯定是好得羡煞旁人了！[p]
+[name name="手机"]
+滴滴嘟，来信息了。
+[wz]
+我拿起手机扫了一眼，原来是她——雅泽雾樱，我的青梅竹马发来的早安问好信息，肯定是甜蜜蜜地催促我赶紧起床的信息了。真是，其实我根本不介意你直接进到我房间来叫我起床的，我可是为此早就养成了裸睡的习惯了呢。
+[name name="手机"]
+我先去上学了，你个白痴就继续慢吞吞吧。我是今天的风纪委员，要是你迟到了我绝对不会手下留情的。[p]
+[name name="桐人"]
+.....好吧，其实我们的关系已经完全没有了小时候那种亲密黏腻的程度了，现在在她眼里我可能只是个从小到大毫无长进的白痴吧。[p]
+
 
 [sprite index=71 file="image/menu/ch1"]
 [anchor index=71 set="bottomcenter" keep=true]

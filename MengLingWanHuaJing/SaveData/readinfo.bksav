@@ -1,36 +1,36 @@
 %[
   "main.bkbin"=>%[
-    "*main"=>422
+    "*main"=>445
   ],
   "menu_main.bkscr"=>%[
-    "*changeSe"=>6,
-    "*Anime"=>78,
-    "*changeFullScreen"=>404,
-    "*changeAutoSpeed"=>6,
-    "*back"=>16,
-    "*modeSet"=>167,
+    "*xxx"=>167,
+    "*changeBGM"=>6,
+    "*loadConfig"=>590,
+    "*changeSkipAll"=>404,
+    "*quitGame"=>9,
     "*menuback"=>13,
     "*changeTextSpeed"=>6,
-    "*quitGame"=>9,
-    "*changeSkipAll"=>404,
-    "*loadConfig"=>590,
-    "*changeBGM"=>6,
-    "*xxx"=>167
+    "*back"=>16,
+    "*modeSet"=>167,
+    "*changeAutoSpeed"=>6,
+    "*changeFullScreen"=>404,
+    "*Anime"=>78,
+    "*changeSe"=>6
   ],
   "saveload.bkscr"=>%[
-    "*loadPage"=>698,
-    "*loadSL"=>320,
-    "*runContinue"=>69,
-    "*runSL"=>372,
-    "*runSLback"=>23,
+    "*SLback"=>12,
     "*functionSL"=>15,
-    "*SLback"=>12
+    "*runSLback"=>23,
+    "*runSL"=>372,
+    "*runContinue"=>69,
+    "*loadSL"=>320,
+    "*loadPage"=>698
   ],
   "main.bkscr"=>%[
-    "*menuAnime"=>11,
-    "*back"=>16,
-    "*main"=>398,
+    "*start"=>88,
     "*menuback"=>13,
-    "*start"=>88
+    "*main"=>398,
+    "*back"=>16,
+    "*menuAnime"=>11
   ]
 ]

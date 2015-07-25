@@ -3,8 +3,8 @@
 %[
   "soundVolume"=>100,
   "voiceVolume"=>100,
-  "musicVolume"=>100,
-  "textSpeed"=>50,
+  "musicVolume"=>17,
+  "textSpeed"=>46,
   "mouseCursorAutoHideTime"=>2000,
   "mouseCursor"=>"",
   "fontSizeFactor"=>1,
