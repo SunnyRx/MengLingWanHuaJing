@@ -1,16 +1,16 @@
 [
   void,
   %[
-    "text"=>"序章-梦的伊始",
-    "savetime"=>1437739928
+    "savetime"=>1437739928,
+    "text"=>"序章-梦的伊始"
   ],
   %[
-    "savetime"=>1437661566,
-    "text"=>"梦的开端"
+    "text"=>"梦的开端",
+    "savetime"=>1437661566
   ],
   %[
-    "text"=>"",
-    "savetime"=>1437662344
+    "savetime"=>1437662344,
+    "text"=>""
   ],
   void,
   void,

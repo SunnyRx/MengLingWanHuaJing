@@ -54,6 +54,7 @@
 
 //——————————loadPage——————————
 *loadPage
+	[remove index=306]
 	#log("LoadPage called.CurrentPage.");
 	#log(page);
 	#global.select = select; 
@@ -78,6 +79,10 @@
 
 	[if "(select==page*5+1)"]
 		[button index=300+1*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+		[if "SaveData.exist(select)"]
+		[sprite index=306 file="saveImage"+toString(select)]
+		[addto index=306 target=_SL_label pos=[160,400] zorder=199]
+		[endif]
 	[else]
 		[button index=300+1*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]]
 	[endif]
@@ -85,6 +90,10 @@
 
 	[if "(select==page*5+2)"]
 		[button index=300+2*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+		[if "SaveData.exist(select)"]
+		[sprite index=306 file="saveImage"+toString(select)]
+		[addto index=306 target=_SL_label pos=[160,400] zorder=199]
+		[endif]
 	[else]
 		[button index=300+2*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]]
 	[endif]
@@ -92,6 +101,10 @@
 
 	[if "(select==page*5+3)"]
 		[button index=300+3*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+		[if "SaveData.exist(select)"]
+		[sprite index=306 file="saveImage"+toString(select)]
+		[addto index=306 target=_SL_label pos=[160,400] zorder=199]
+		[endif]
 	[else]
 		[button index=300+3*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]]
 	[endif]
@@ -99,6 +112,10 @@
 
 	[if "(select==page*5+4)"]
 		[button index=300+4*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+		[if "SaveData.exist(select)"]
+		[sprite index=306 file="saveImage"+toString(select)]
+		[addto index=306 target=_SL_label pos=[160,400] zorder=199]
+		[endif]
 	[else]
 		[button index=300+4*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]]
 	[endif]
@@ -106,6 +123,10 @@
 
 	[if "(select==page*5+5)"]
 		[button index=300+5*10+5 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"]
+		[if "SaveData.exist(select)"]
+		[sprite index=306 file="saveImage"+toString(select)]
+		[addto index=306 target=_SL_label pos=[160,400] zorder=199]
+		[endif]
 	[else]
 		[button index=300+5*10+5 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]]
 	[endif]
