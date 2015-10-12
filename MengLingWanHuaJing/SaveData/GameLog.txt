@@ -117,10 +117,241 @@ global.select = 0;##
 　#global.animeTest.enable=true;
 　@return
 　@waitbutton
+　menu_main.bkscr : *Anime
+　@pretrans index=0
+　#t.menuAnima=false;
+　@sprite index=0 file=_backgroundA
+　@trans mode="universal" rule="image/rule/69" time=5000 index=0
+　@waittrans index=0
 　menu_main.bkscr : *modeSet
 　#global.animeTest.enable=false;
 　#log(global.animeText.enable);
 　@remove index=_main_layer
+　@jump file="main.bkscr" (main.bkscr) label="*start" (*start)
+　main.bkscr : *start
+　@loadTextbox
+　{
+　　ld_extend.bkscr : *loadTextbox
+　　@ld_dialogbox
+　　{
+　　　ld_extend.bkscr : *ld_dialogbox
+　　　@messagelayer index=_ldMessage_layer active=1
+　　　@addto index=_ldMessage_layer target=basic_layer zorder=50
+　　　@textwindow file=_menuDocument+"dialogBox" opacity=191 pos=[0, 448] rect=[134, 30, 736, 120] xinterval=1 yinterval=1
+　　　@textstyle size=22 color=[16777215, 16777215] bold=true shadow=true
+　　　@sprite index=_ldMessage_layer+1 file=_menuDocument+"star"
+　　　@textcursor index=_ldMessage_layer+1 follow=false pos=[1018, 100]
+　　　@messagelayer index=_ldName_layer active=1
+　　　@addto index=_ldName_layer target=_ldMessage_layer zorder=50
+　　　@textwindow opacity=255 pos=[157, 395] rect=[0, 0, 100, 40] xinterval=1 yinterval=1
+　　　@textstyle size=21 bold=false
+　　　@messagelayer index=_ldName_layer active=0
+　　　@messagelayer index=_ldMessage_layer active=1
+　　　@layer index=_mmenu_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
+　　　@button index=_mmenu_layer+1 idle=_menuDocument+"menu_background" onclick=["*ifMenu","ld_extend","call"]
+　　　@addto index=_mmenu_layer+1 target=_mmenu_layer
+　　　@sprite index=_mmenu_layer+2 file=_menuDocument+"menu_background2"
+　　　@button index=_mmenu_layer+3 idle=_menuDocument+"menu_save_normal" hover=_menuDocument+"menu_save_touch" click=_menuDocument+"menu_save_touch" onclick=["*MSave","ld_extend","call"]
+　　　@button index=_mmenu_layer+4 idle=_menuDocument+"menu_load_normal" hover=_menuDocument+"menu_load_touch" click=_menuDocument+"menu_load_touch" onclick=["*MLoad","ld_extend","call"]
+　　　@button index=_mmenu_layer+5 idle=_menuDocument+"menu_log_normal" hover=_menuDocument+"menu_log_touch" click=_menuDocument+"menu_log_touch" onclick=["*historyTextbox","ld_extend","call"]
+　　　@button index=_mmenu_layer+6 idle=_menuDocument+"menu_auto_normal" hover=_menuDocument+"menu_auto_touch" click=_menuDocument+"menu_auto_touch" onclick=["*autoModeOn","ld_extend","call"]
+　　　@button index=_mmenu_layer+7 idle=_menuDocument+"menu_skip_normal" hover=_menuDocument+"menu_skip_touch" click=_menuDocument+"menu_skip_touch" onclick=["*skipModeOn","ld_extend","call"]
+　　　@button index=_mmenu_layer+8 idle=_menuDocument+"menu_menu_normal" hover=_menuDocument+"menu_menu_touch" click=_menuDocument+"menu_menu_touch" onclick=["*MMenu","ld_extend","call"]
+　　　@button index=_mmenu_layer+9 idle=_menuDocument+"menu_config_normal" hover=_menuDocument+"menu_config_touch" click=_menuDocument+"menu_config_touch" onclick=["*loadConfig","menu_main","call"]
+　　　@return
+　　}
+　　@ld_dialogboxButton
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxButton
+　　　@layer index=_text_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
+　　　@addto index=_text_layer target=basic_layer zorder=_text_layer
+　　　@button index=501 idle=_menuDocument+"dialogBox_menu" hover=_menuDocument+"dialogBox_menu" click=_menuDocument+"dialogBox_menu" onclick=["*showMenu","ld_extend","call"]
+　　　@addto index=501 target=_text_layer zorder=90 pos=[1022, 386]
+　　　@return
+　　}
+　　@return
+　}
+　@history output=true
+　@sprite index=70 file="image/menu/road2"
+　@addto index=70 target=basic_layer zorder=0 pos=[0, 0] opacity=255
+　#t.title="序章-梦的伊始";
+　@wz
+　{
+　　macroself.bkscr : *wz
+　　@er
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　Hello
+　@p
+　This is test!
+　@p
+　@bgm file="sound/hand in hand"
+　@wz
+　{
+　　macroself.bkscr : *wz
+　　@er
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　你
+　@l
+　@r
+　听说过“祈梦石”吗？
+　@p
+　传说那是魔鬼的礼物，能够打破梦境之间的壁垒，带来一段前所未有的经历和
+　@p
+　但既是魔鬼的礼物，自然也有其危险性。
+　@l
+　@r
+　是什么
+　@l
+　@r
+　且自己去体会吧。
+　@p
+　@name name="桐人"
+　{
+　　macroself.bkscr : *name
+　　@er
+　　@messagelayer index=_ldName_layer active=1
+　　#log(name);
+　　"桐人"
+　　@remove index=1001
+　　[警告]没有找到索引1001对应的精灵，该精灵没有创建或者已被销毁。
+　　　　　当试图执行命令（remove）时该错误处于原文件（macroself.bkscr）的第27行。
+　　@sprite index=1001 file="image/menu/name_2"
+　　@addto index=1001 target=500 pos=[157, 395]
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　 
+　好奇怪的梦......
+　@p
+　我拍了拍脑袋，按掉了床边嘀铃铃响的闹钟，起床洗漱，开始这一天的生活。
+　@p
+　我，绘谷桐人，一个普通的高中生，没有什么特别的地方。
+　@p
+　唯一让人羡慕的就是我有一个女神级的青梅竹马，我和她的关系嘛......
+　@l
+　@r
+　肯定是好得羡煞旁人了！
+　@p
+　@name name="手机"
+　{
+　　macroself.bkscr : *name
+　　@er
+　　@messagelayer index=_ldName_layer active=1
+　　#log(name);
+　　"手机"
+　　@remove index=1001
+　　@textsprite index=1001 text=""+name color=16777215 size=30 stroke=true strokecolor=2058086
+　　@addto index=1001 target=500 pos=[157, 395]
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　滴滴嘟，来信息了。
+　@wz
+　{
+　　macroself.bkscr : *wz
+　　@er
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　我拿起手机扫了一眼，原来是她——雅泽雾樱，我的青梅竹马发来的早安问好信息，肯定是甜蜜蜜地催促我赶紧起床的信息了。真是，其实我根本不介意你直接进到我房间来叫我起床的，我可是为此早就养成了裸睡的习惯了呢。
+　@name name="手机"
+　{
+　　macroself.bkscr : *name
+　　@er
+　　@messagelayer index=_ldName_layer active=1
+　　#log(name);
+　　"手机"
+　　@remove index=1001
+　　@textsprite index=1001 text=""+name color=16777215 size=30 stroke=true strokecolor=2058086
+　　@addto index=1001 target=500 pos=[157, 395]
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　我先去上学了，你个白痴就继续慢吞吞吧。我是今天的风纪委员，要是你迟到了我绝对不会手下留情的。
+　@p
+　@name name="桐人"
+　{
+　　macroself.bkscr : *name
+　　@er
+　　@messagelayer index=_ldName_layer active=1
+　　#log(name);
+　　"桐人"
+　　@remove index=1001
+　　@sprite index=1001 file="image/menu/name_2"
+　　@addto index=1001 target=500 pos=[157, 395]
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　.....好吧，其实我们的关系已经完全没有了小时候那种亲密黏腻的程度了，现在在她眼里我可能只是个从小到大毫无长进的白痴吧。
+　@p
+　@sprite index=71 file="image/menu/ch1"
+　@anchor index=71 set="bottomcenter" keep=true
+　@addto index=71 target=basic_layer pos=[System.resolutionSize[0]/2,System.resolutionSize[1],] opacity=255
+　@name name="雾樱"
+　{
+　　macroself.bkscr : *name
+　　@er
+　　@messagelayer index=_ldName_layer active=1
+　　#log(name);
+　　"雾樱"
+　　@remove index=1001
+　　@sprite index=1001 file="image/menu/name_1"
+　　@addto index=1001 target=500 pos=[157, 395]
+　　@messagelayer index=_ldName_layer active=0
+　　@messagelayer index=_ldMessage_layer active=1
+　　@return
+　}
+　但是没有梦想的话，怎么成为梦想家呢。
+　@p
+　ld_extend.bkscr : *showMenu
+　@screenshot index=1024 target=basic_layer width=265 height=149
+　@addto index=_mmenu_layer target=basic_layer zorder=800
+　@addto index=_mmenu_layer+2 target=_mmenu_layer pos=[1104, 0]
+　@addto index=_mmenu_layer+3 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,90,]
+　@addto index=_mmenu_layer+4 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,140,]
+　@addto index=_mmenu_layer+5 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,190,]
+　@addto index=_mmenu_layer+6 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,240,]
+　@addto index=_mmenu_layer+7 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,290,]
+　@addto index=_mmenu_layer+8 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,340,]
+　@addto index=_mmenu_layer+9 target=_mmenu_layer pos=[(Sprite((_mmenu_layer+2))).x+40,390,]
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+2
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+3
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+4
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+5
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+6
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+7
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+8
+　@action mode="moveby" pos=[-264, 0] time=50 target=_mmenu_layer+9
+　@return
+　ld_extend.bkscr : *MLoad
+　@hideTextbox
+　{
+　　ld_extend.bkscr : *hideTextbox
+　　@ld_dialogboxHide
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxHide
+　　　@textoff
+　　　@return
+　　}
+　　@ld_dialogboxButtonHide
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxButtonHide
+　　　@remove index=_text_layer
+　　　@return
+　　}
+　　@return
+　}
 　#global.slmark=0;
 　@call file="saveload.bkscr" (saveload.bkscr) label="*loadSL" (*loadSL)
 　saveload.bkscr : *loadSL
@@ -196,404 +427,12 @@ global.select = 0;##
 　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
 　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
 　@next
-　@button index=315 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@sprite index=306 file="saveImage"+toString(select)
-　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@sprite index=306 file="saveImage"+toString(select)
-　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
 　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
 　@addto index=315 target=_SL_label pos=[142, 136]
 　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
 　@addto index=325 target=_SL_label pos=[142, 182]
 　@button index=335 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
 　@sprite index=306 file="saveImage"+toString(select)
-　【错误】找不到文件（saveImage3）。
-　　　　　当试图执行命令（sprite）时该错误处于原文件（saveload.bkscr）的第105行。
-　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@sprite index=306 file="saveImage"+toString(select)
-　【错误】找不到文件（saveImage3）。
-　　　　　当试图执行命令（sprite）时该错误处于原文件（saveload.bkscr）的第105行。
-　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@sprite index=306 file="saveImage"+toString(select)
-　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@sprite index=306 file="saveImage"+toString(select)
-　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
-　@addto index=335 target=_SL_label pos=[142, 228]
-　@button index=345 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@addto index=345 target=_SL_label pos=[142, 274]
-　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
-　@addto index=355 target=_SL_label pos=[142, 320]
-　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
-　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
-　@addto index=302 target=_SL_label pos=[973, 412]
-　@addto index=303 target=_SL_label pos=[973, 457]
-　@trans mode="crossfade" time=0 index=_SL_label
-　@waittrans index=_SL_label
-　@return
-　saveload.bkscr : *loadPage
-　@remove index=306
-　#log("LoadPage called.CurrentPage.");
-　"LoadPage called.CurrentPage."
-　#log(page);
-　0
-　#global.select = select; 
-　#f.SLpage=page;
-　@pretrans index=_SL_label
-　@for var=i range=range(1,6)
-　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
-　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
-　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
-　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
-　@next
-　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
-　@addto index=315 target=_SL_label pos=[142, 136]
-　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
-　@addto index=325 target=_SL_label pos=[142, 182]
-　@button index=335 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
-　@sprite index=306 file="saveImage"+toString(select)
-　【错误】找不到文件（saveImage3）。
-　　　　　当试图执行命令（sprite）时该错误处于原文件（saveload.bkscr）的第105行。
 　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
 　@addto index=335 target=_SL_label pos=[142, 228]
 　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
@@ -682,6 +521,766 @@ global.select = 0;##
 　saveload.bkscr : *SLback
 　@removeall index=_SL_label delete=true
 　@return
-　@addto index=_main_layer target=basic_layer
-　#global.animeTest.enable=true;
+　@showTextbox
+　{
+　　ld_extend.bkscr : *showTextbox
+　　@ld_dialogboxShow
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxShow
+　　　@texton
+　　　@return
+　　}
+　　@ld_dialogboxButtonShow
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxButtonShow
+　　　@addto index=_text_layer target=basic_layer zorder=_text_layer
+　　　@return
+　　}
+　　@return
+　}
 　@return
+　ld_extend.bkscr : *MSave
+　@hideTextbox
+　{
+　　ld_extend.bkscr : *hideTextbox
+　　@ld_dialogboxHide
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxHide
+　　　@textoff
+　　　@return
+　　}
+　　@ld_dialogboxButtonHide
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxButtonHide
+　　　@remove index=_text_layer
+　　　@return
+　　}
+　　@return
+　}
+　#global.slmark=1;
+　@call file="saveload.bkscr" (saveload.bkscr) label="*loadSL" (*loadSL)
+　saveload.bkscr : *loadSL
+　#log(animeText.enable);
+　@layer index=_SL_label width=System.resolutionSize[0] height=System.resolutionSize[1]
+　@addto index=_SL_label target=basic_layer zorder=900 pos=[0, 0] opacity=255
+　@layer index=_SL_labelM width=System.resolutionSize[0] height=System.resolutionSize[1] color=0 opacity=191
+　#flag=global.slmark;
+　#f.SLpage=0;
+　#SLflag=flag;
+　@sprite index=301 file=_saveBackground
+　@addto index=301 target=_SL_label zorder=0 pos=[0, 0] opacity=255
+　@loadPage page=f.SLpage select=0
+　{
+　　saveload.bkscr : *loadPage
+　　@remove index=306
+　　[警告]没有找到索引306对应的精灵，该精灵没有创建或者已被销毁。
+　　　　　当试图执行命令（remove）时该错误处于原文件（saveload.bkscr）的第57行。
+　　#log("LoadPage called.CurrentPage.");
+　　"LoadPage called.CurrentPage."
+　　#log(page);
+　　0
+　　#global.select = select; 
+　　#f.SLpage=page;
+　　@pretrans index=_SL_label
+　　@for var=i range=range(1,6)
+　　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　　@next
+　　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　　@addto index=315 target=_SL_label pos=[142, 136]
+　　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　　@addto index=325 target=_SL_label pos=[142, 182]
+　　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　　@addto index=335 target=_SL_label pos=[142, 228]
+　　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　　@addto index=345 target=_SL_label pos=[142, 274]
+　　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　　@addto index=355 target=_SL_label pos=[142, 320]
+　　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　　@addto index=302 target=_SL_label pos=[973, 412]
+　　@addto index=303 target=_SL_label pos=[973, 457]
+　　@trans mode="crossfade" time=0 index=_SL_label
+　　@waittrans index=_SL_label
+　　@return
+　}
+　@button index=304 idle=_menuDocument+"SL_yes_normal" hover=_menuDocument+"SL_yes_touch" click=_menuDocument+"SL_yes_touch" onclick=["*runSL","saveload","call","flag=SLflag,select=global.select"]
+　@button index=305 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*SLback","saveload","jump"]
+　@addto index=304 target=_SL_label pos=[896, 560]
+　@addto index=305 target=_SL_label pos=[1010, 560]
+　@waitbutton
+　saveload.bkscr : *loadPage
+　@remove index=306
+　[警告]没有找到索引306对应的精灵，该精灵没有创建或者已被销毁。
+　　　　当试图执行命令（remove）时该错误处于原文件（saveload.bkscr）的第57行。
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　0
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
+　@sprite index=306 file="saveImage"+toString(select)
+　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *loadPage
+　@remove index=306
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　0
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
+　@sprite index=306 file="saveImage"+toString(select)
+　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *loadPage
+　@remove index=306
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　1
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text="————————————" color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *loadPage
+　@remove index=306
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　0
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *loadPage
+　@remove index=306
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　1
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text="————————————" color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *loadPage
+　@remove index=306
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　0
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+3"]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *loadPage
+　@remove index=306
+　#log("LoadPage called.CurrentPage.");
+　"LoadPage called.CurrentPage."
+　#log(page);
+　0
+　#global.select = select; 
+　#f.SLpage=page;
+　@pretrans index=_SL_label
+　@for var=i range=range(1,6)
+　@textsprite index=300+i*10+1 text="NO."+(page*5+i) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+1 target=_SL_label zorder=199 pos=[142,(i-1)*46+136,]
+　@textsprite index=300+i*10+2 text=SaveData.getText((page*5+i)) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+2 target=_SL_label zorder=199 pos=[242,(i-1)*46+136,]
+　@textsprite index=300+i*10+3 text=toString(((SaveData.getTime((page*5+i))).getYear()))+"/"+toString(((SaveData.getTime((page*5+i))).getMonth()))+"/"+toString(((SaveData.getTime((page*5+i))).getDay()))+" "+toString(((SaveData.getTime((page*5+i))).getHour()))+":"+toString(((SaveData.getTime((page*5+i))).getMinute())) color=15855062 stroke=true strokecolor=11370804
+　@addto index=300+i*10+3 target=_SL_label zorder=199 pos=[842,(i-1)*46+136,]
+　@next
+　@button index=315 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+1"]
+　@addto index=315 target=_SL_label pos=[142, 136]
+　@button index=325 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+2"]
+　@addto index=325 target=_SL_label pos=[142, 182]
+　@button index=335 idle=_menuDocument+"SL_select_touch" hover=_menuDocument+"SL_select_touch" click=_menuDocument+"SL_select_touch"
+　@sprite index=306 file="saveImage"+toString(select)
+　@addto index=306 target=_SL_label zorder=199 pos=[160, 400]
+　@addto index=335 target=_SL_label pos=[142, 228]
+　@button index=345 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+4"]
+　@addto index=345 target=_SL_label pos=[142, 274]
+　@button index=355 idle=_menuDocument+"SL_select_normal" hover=_menuDocument+"SL_select_normal" click=_menuDocument+"SL_select_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage select=page*5+5"]
+　@addto index=355 target=_SL_label pos=[142, 320]
+　@button index=302 idle=_menuDocument+"SL_perview_normal" hover=_menuDocument+"SL_perview_touch" click=_menuDocument+"SL_perview_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage-1 select=0"]
+　@button index=303 idle=_menuDocument+"SL_next_normal" hover=_menuDocument+"SL_next_touch" click=_menuDocument+"SL_next_touch" onclick=["*loadPage","saveload","callback","page=f.SLpage+1 select=0"]
+　@addto index=302 target=_SL_label pos=[973, 412]
+　@addto index=303 target=_SL_label pos=[973, 457]
+　@trans mode="crossfade" time=0 index=_SL_label
+　@waittrans index=_SL_label
+　@return
+　saveload.bkscr : *SLback
+　@removeall index=_SL_label delete=true
+　@return
+　@showTextbox
+　{
+　　ld_extend.bkscr : *showTextbox
+　　@ld_dialogboxShow
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxShow
+　　　@texton
+　　　@return
+　　}
+　　@ld_dialogboxButtonShow
+　　{
+　　　ld_extend.bkscr : *ld_dialogboxButtonShow
+　　　@addto index=_text_layer target=basic_layer zorder=_text_layer
+　　　@return
+　　}
+　　@return
+　}
+　@return
+　ld_extend.bkscr : *MMenu
+　@removeall index=basic_layer delete=true
+　@call file="main.bkscr" (main.bkscr) label="*main" (*main)
+　main.bkscr : *main
+　##
+　var _logo="image/menu/logo";//logo文件##
+　##
+　var _backgroundA="image/menu/main_backgroundA";//主菜单背景图片文件##
+　##
+　var _backgroundB="image/menu/main_backgroundB";//主菜单背景图片文件##
+　##
+　var _configBackground="image/menu/config_background";//Config菜单背景##
+　##
+　var _menu_layer=10;//Config层##
+　##
+　var _main_layer=8;//主菜单层##
+　##
+　var _background_layer=7;//主菜单背景层##
+　##
+　var _menuDocument="image/menu/";//放menu图片的文件夹路径##
+　##
+　var _saveBackground=_menuDocument+"save ui";//存档界面背景##
+　##
+　var _loadBackground=_menuDocument+"load ui";//读档界面背景##
+　##
+　var _sl_layer=30;//##
+　##
+　var _page_layer=40;//##
+　##
+　var _littlemenu_layer=50;//小菜单层##
+　##
+　var _saveCount=0;//存档数量##
+　##
+　var tFlag;##
+　##
+　var tbb;##
+　##
+　sf.page=0;##
+　##
+　global.slmark=0;##
+　##
+　var _menuDocument="image/menu/";//放menu图片的文件夹路径##
+　##
+　var _text_layer=500;##
+　##
+　var _logBackground=_menuDocument+"log ui";//历史记录界面的背景##
+　##
+　var _log_layer=700;##
+　##
+　var _ldMessage_layer=550;//对话框编号##
+　##
+　var _ldName_layer=600;//姓名框编号##
+　##
+　var _mmenu_layer=800;//菜单层##
+　##
+　var _saveBackground=_menuDocument+"SL_backgroundB";//存档界面背景##
+　##
+　var _loadBackground=_menuDocument+"SL_backgroundA";//读档界面背景##
+　##
+　global.SLflag;//存读档标记##
+　##
+　var _SL_label=300;//存档界面层，存读档界面的所有元素都放在这个层上##
+　##
+　var _SL_labelM=290;//存读档提示界面##
+　##
+　global.select = 0;##
+　@savepoint
+　@loadMainMenu
+　{
+　　menu_main.bkscr : *loadMainMenu
+　　@history output=false
+　　@stop
+　　@call label=*back
+　　menu_main.bkscr : *back
+　　@removeall index=_menu_layer
+　　【错误】没有找到索引10对应的精灵，该精灵没有创建或者已被销毁。
+　　　　　　当试图执行命令（removeall）时该错误处于原文件（menu_main.bkscr）的第227行。
+　　@return
+　　@call label=*menuback
+　　menu_main.bkscr : *menuback
+　　@removeall index=_littlemenu_layer
+　　【错误】没有找到索引50对应的精灵，该精灵没有创建或者已被销毁。
+　　　　　　当试图执行命令（removeall）时该错误处于原文件（menu_main.bkscr）的第232行。
+　　@return
+　　@layer index=_main_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
+　　@addto index=_main_layer target=basic_layer zorder=10 pos=[0, 0] opacity=255
+　　@layer index=_background_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
+　　@addto index=_background_layer target=basic_layer zorder=0 pos=[0, 0] opacity=255
+　　@sprite index=0 file=_backgroundB
+　　@addto index=0 target=_background_layer zorder=0 pos=[0, 0] opacity=0
+　　@action mode="fadeto" opacity=255 time=3000 target=0
+　　@waitaction index=0 canskip=true
+　　@pretrans index=_main_layer
+　　@button index=1 idle=_menuDocument+"button_main_newgame_normal" hover=_menuDocument+"button_main_newgame_touch" click=_menuDocument+"button_main_newgame_click" onclick=["*modeSet","menu_main","call","mode=1"]
+　　@anchor index=1 set="center" keep=true
+　　@addto index=1 target=_main_layer zorder=0 pos=[908, 145] opacity=255
+　　@button index=2 idle=_menuDocument+"button_main_load_normal" hover=_menuDocument+"button_main_load_touch" click=_menuDocument+"button_main_load_click" onclick=["*modeSet","menu_main","call","mode=2"]
+　　@anchor index=2 set="center" keep=true
+　　@addto index=2 target=_main_layer zorder=0 pos=[903, 230] opacity=255
+　　@button index=3 idle=_menuDocument+"button_main_cg_normal" hover=_menuDocument+"button_main_cg_touch" click=_menuDocument+"button_main_cg_click" onclick=["*modeSet","menu_main","call","mode=3"]
+　　@anchor index=3 set="center" keep=true
+　　@addto index=3 target=_main_layer zorder=0 pos=[898, 315] opacity=255
+　　@button index=4 idle=_menuDocument+"button_main_config_normal" hover=_menuDocument+"button_main_config_touch" click=_menuDocument+"button_main_config_click" onclick=["*modeSet","menu_main","call","mode=4"]
+　　@anchor index=4 set="center" keep=true
+　　@addto index=4 target=_main_layer zorder=0 pos=[888, 400] opacity=255
+　　@button index=5 idle=_menuDocument+"button_main_exit_normal" hover=_menuDocument+"button_main_exit_touch" click=_menuDocument+"button_main_exit_click" onclick=["*modeSet","menu_main","call","mode=5"]
+　　@anchor index=5 set="center" keep=true
+　　@addto index=5 target=_main_layer zorder=0 pos=[873, 485] opacity=255
+　　@sprite index=6 file=_menuDocument+"main_title"
+　　@addto index=6 target=_main_layer zorder=0 pos=[0, 0] opacity=255
+　　@trans mode="universal" rule="image/rule/9" time=3000 index=_main_layer
+　　@waittrans index=_main_layer
+　　#t.menuAnima=true;//标记图A还图B
+　　@call label=*menuAnime
+　　menu_main.bkscr : *menuAnime
+　　#global.animeTest=Timer(function(){Scripts.call(*Anime,"menu_main");},interval=3000);
+　　#global.animeTest.interval=10000;
+　　#global.animeTest.enable=true;
+　　@return
+　　@waitbutton
+　　menu_main.bkscr : *modeSet
+　　#global.animeTest.enable=false;
+　　#log(global.animeText.enable);
+　　@remove index=_main_layer
+　　@call label=*loadConfig
+　　menu_main.bkscr : *loadConfig
+　　@layer index=_menu_layer width=System.resolutionSize[0] height=System.resolutionSize[1]
+　　@addto index=_menu_layer target=basic_layer zorder=900 pos=[0, 0] opacity=255
+　　@sprite index=11 file=_configBackground
+　　@addto index=11 target=_menu_layer zorder=0 pos=[0, 0] opacity=255
+　　@checkbox index=12 idle=_menuDocument+"skipAll_off" checked=_menuDocument+"skipAll_on" onchanged=["*changeSkipAll","menu_main","callback","flag=1"] state=System.skipAll
+　　@anchor index=12 set="center" keep=true
+　　@addto index=12 target=_menu_layer zorder=0 pos=[811, 410] opacity=255
+　　@checkbox index=13 idle=_menuDocument+"skip_off" checked=_menuDocument+"skip_on" onchanged=["*changeSkipAll","menu_main","callback","flag=2"] state=!System.skipAll
+　　@anchor index=13 set="center" keep=true
+　　@addto index=13 target=_menu_layer zorder=0 pos=[926, 410] opacity=255
+　　@slider index=14 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeAutoSpeed","menu_main","call","value=value"] min=0 max=100 value=System.autoModeTime
+　　@anchor index=14 set="center" keep=true
+　　@addto index=14 target=_menu_layer zorder=0 pos=[867, 162] opacity=255
+　　@slider index=15 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeTextSpeed","menu_main","call","value=value"] min=0 max=100 value=System.textSpeed
+　　@anchor index=15 set="center" keep=true
+　　@addto index=15 target=_menu_layer zorder=0 pos=[867, 223] opacity=255
+　　@checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen","menu_main","callback","flag=1"] state=System.fullScreen
+　　@anchor index=16 set="center" keep=true
+　　@addto index=16 target=_menu_layer zorder=0 pos=[811, 471] opacity=255
+　　@checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen","menu_main","callback","flag=2"] state=!System.fullScreen
+　　@anchor index=17 set="center" keep=true
+　　@addto index=17 target=_menu_layer zorder=0 pos=[926, 471] opacity=255
+　　@slider index=18 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeBGM","menu_main","call","value=value"] min=0 max=100 value=Channel.musicVolume
+　　@anchor index=18 set="center" keep=true
+　　@addto index=18 target=_menu_layer zorder=0 pos=[867, 285] opacity=255
+　　@slider index=19 back=_menuDocument+"sliderbar" block=_menuDocument+"slider" onchanged=["*changeSe","menu_main","call","value=value"] min=0 max=100 value=Channel.soundVolume
+　　@anchor index=19 set="center" keep=true
+　　@addto index=19 target=_menu_layer zorder=0 pos=[867, 347] opacity=255
+　　@button index=25 idle=_menuDocument+"config_back_normal" hover=_menuDocument+"config_back_touch" click=_menuDocument+"config_back_touch" onclick=["*back","menu_main","jump"]
+　　@anchor index=25 set="center" keep=true
+　　@addto index=25 target=_menu_layer pos=[1011, 560]
+　　@waitbutton
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeAutoSpeed
+　　#System.autoModeTime=value;
+　　@return
+　　menu_main.bkscr : *changeFullScreen
+　　#System.fullScreen=true;
+　　@checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen","menu_main","callback","flag=1"] state=System.fullScreen
+　　@anchor index=16 set="center" keep=true
+　　@addto index=16 target=_menu_layer zorder=0 pos=[811, 471] opacity=255
+　　@checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen","menu_main","callback","flag=2"] state=!System.fullScreen
+　　@anchor index=17 set="center" keep=true
+　　@addto index=17 target=_menu_layer zorder=0 pos=[926, 471] opacity=255
+　　@return
+　　menu_main.bkscr : *changeFullScreen
+　　#System.fullScreen=false;
+　　@checkbox index=16 idle=_menuDocument+"fullScreen_off" checked=_menuDocument+"fullScreen_on" onchanged=["*changeFullScreen","menu_main","callback","flag=1"] state=System.fullScreen
+　　@anchor index=16 set="center" keep=true
+　　@addto index=16 target=_menu_layer zorder=0 pos=[811, 471] opacity=255
+　　@checkbox index=17 idle=_menuDocument+"window_off" checked=_menuDocument+"window_on" onchanged=["*changeFullScreen","menu_main","callback","flag=2"] state=!System.fullScreen
+　　@anchor index=17 set="center" keep=true
+　　@addto index=17 target=_menu_layer zorder=0 pos=[926, 471] opacity=255
+　　@return
+　　menu_main.bkscr : *back
+　　@removeall index=_menu_layer
+　　@return
+　　@addto index=_main_layer target=basic_layer
+　　#global.animeTest.enable=true;
+　　@return
+　　menu_main.bkscr : *modeSet
+　　#global.animeTest.enable=false;
+　　#log(global.animeText.enable);
+　　@remove index=_main_layer
+　　@addto index=_main_layer target=basic_layer
+　　#global.animeTest.enable=true;
+　　@return

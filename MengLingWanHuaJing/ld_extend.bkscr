@@ -232,6 +232,7 @@
 [return]
 	
 *showMenu
+[screenshot index=1024 target=basic_layer width=265 height=149]
 [addto index=_mmenu_layer target=basic_layer zorder=800]
 
 [addto index=_mmenu_layer+2 target=_mmenu_layer pos=[1104,0]]
@@ -265,7 +266,7 @@
 [return]
 	
 *MSave
-[screenshot index=1024 target=basic_layer width=265 height=149]
+
 [hideTextbox]
 #global.slmark=1;
 [call label="*loadSL" file="saveload"]
